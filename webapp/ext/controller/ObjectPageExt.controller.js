@@ -97,6 +97,65 @@ sap.ui.define(['jquery.sap.global', 'sap/m/Button', 'sap/m/TextArea', 'sap/m/Dia
 			// 	});
 			// }
 			,
+			onHistory: function(){
+
+				var oModel = this.getView().getModel();
+				// List list = new List({
+				// 			items: {
+				// 				path: 'test>/results',
+				// 				template: new StandardListItem({
+				// 					title: "{DemandId}",
+				// 					info: "{FiscalQuarter}"+",{OrgId}"
+				// 				})
+				// 			}
+				// 		});
+				var w = new sap.ui.model.json.JSONModel();
+				var that = this;
+
+				oModel.read("/Demands", {
+					context: null,
+					urlParameters: null,
+					async: true,
+					filters: [],
+					sorters: [],
+					success: function(oData) {
+						w.setData(oData);
+						that.getView().setModel(w, "test");
+						var dialog = new Dialog({
+							title: 'Supplier Details',
+							contentWidth: "550px",
+							contentHeight: "300px",
+							draggable: true,
+							content: new List({
+								items: {
+									path: 'test>/results',
+									template: new StandardListItem({
+										title: "{DemandId}",
+										info: "{FiscalQuarter}" + ",{OrgId}"
+									})
+								}
+							}),
+							beginButton: new Button({
+								text: 'Close',
+								press: function() {
+
+									dialog.close();
+								}
+							}),
+							afterClose: function() {
+								dialog.destroy();
+							}
+						});
+						//to get access to the global model
+						// dialog.addContent(oTextArea);
+						that.getView().addDependent(dialog);
+						dialog.open();
+					},
+					error: function() {
+						// controller.getView().setBusy(false);
+					}
+				});
+			},
 			onClickActionDemandsHeader1: function(oEvent) {
 				alert("came");
 				var oModel = this.getView().getModel();
