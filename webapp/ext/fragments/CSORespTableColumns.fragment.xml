@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m"><!--xmlns="sap.m"-->
+	<Column width="150px">
+		<!--<Text text="{i18n|sap.suite.ui.generic.template.ObjectPage|Negotiations>xfld.BreakoutColumn}"/>-->
+		<Text text="Send Message"/>
+		<customData>
+			<core:CustomData key="p13nData" value='\{"columnKey": "Test", "columnIndex" : "102"}'/>
+		</customData>
+	</Column>
+	<!--<table:Column width="160px">-->
+	<!--	<Label text="{i18n|sap.suite.ui.generic.template.ObjectPage|STTA_C_MP_Product>xfld.BreakoutColumn}"/>-->
+	<!--	<table:template>-->
+	<!--		<Button text="GridTab.Button" press="onGridTableBreakoutButtonPress"></Button>-->
+	<!--	</table:template>-->
+	<!--</table:Column>-->
+</core:FragmentDefinition>

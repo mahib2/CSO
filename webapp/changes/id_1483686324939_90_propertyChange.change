@@ -1,0 +1,29 @@
+{
+	"fileName": "id_1483686324939_90_propertyChange",
+	"fileType": "change",
+	"changeType": "propertyChange",
+	"reference": "CSOSprintII.Component",
+	"packageName": "$TMP",
+	"content": {
+		"property": "subSectionLayout",
+		"oldValue": "TitleOnTop",
+		"newValue": "TitleOnLeft"
+	},
+	"selector": {
+		"id": "CSOSprintII::sap.suite.ui.generic.template.ObjectPage.view.Details::Demands--objectPage",
+		"type": "sap.uxap.ObjectPageLayout",
+		"idIsLocal": false
+	},
+	"layer": "VENDOR",
+	"texts": {},
+	"namespace": "apps/CSOSprintII/changes/",
+	"creation": "2017-01-06T07:05:24.957Z",
+	"originalLanguage": "EN",
+	"conditions": {},
+	"context": "",
+	"support": {
+		"generator": "Change.createInitialFileContent",
+		"service": "",
+		"user": ""
+	}
+}

@@ -1,0 +1,440 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/bc/ui5_ui5/ui2/ushell/resources/sap/ushell/components/factsheet/vocabularies/UI.xml">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/CSODestination/CommodityManager/$metadata">
+		<edmx:Include Alias="CommodityManager.xsodata" Namespace="CommodityManager.xsodata"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="CSOSprintII.CommodityManager.xsodata">
+			<!--===============================================================================
+                Entity Type from chosen collection 
+                ================================================================================-->
+			<Annotations Target="CommodityManager.Demand">
+				<Annotation Term="UI.PresentationVariant">
+					<Record Type="UI.PresentationVariantType">
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.LineItem</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record>
+									<PropertyValue Property="Property" PropertyPath="BaselinePrice"/>
+									<PropertyValue Property="Descending" Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="GroupBy">
+							<Collection>
+								<PropertyPath>DemandQty</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>DemandQty</PropertyPath>
+						<PropertyPath>BaselinePrice</PropertyPath>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint">
+					<Record>
+						<PropertyValue String="REQUEST ID" Property="Title"/>
+						<PropertyValue Property="Value" Path="DemandId"/>
+						<PropertyValue Property="TargetValue" Path="TargetPrice"/>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record>
+								<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Target"/>
+								<PropertyValue Property="DeviationRangeHighValue" Path="DeviationUpperBoundPrice"/>
+								<PropertyValue Property="DeviationRangeLowValue" Path="DeviationLowerBoundPrice"/>
+								<PropertyValue Property="ToleranceRangeHighValue" Path="ToleranceUpperBoundPrice"/>
+								<PropertyValue Property="ToleranceRangeLowValue" Path="ToleranceLowerBoundPrice"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<!--<Annotation Term="UI.Chart">-->
+				<!--	<Record Type="UI.ChartDefinitionType">-->
+				<!--		<PropertyValue Property="MeasureAttributes">-->
+				<!--			<Collection>-->
+				<!--				<Record Type="UI.ChartMeasureAttributeType">-->
+				<!--					<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>-->
+				<!--					<PropertyValue Property="Measure" PropertyPath="BaselinePrice"/>-->
+				<!--					<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>-->
+				<!--				</Record>-->
+				<!--			</Collection>-->
+				<!--		</PropertyValue>-->
+				<!--		<PropertyValue Property="DimensionAttributes"/>-->
+				<!--		<PropertyValue Property="Actions"/>-->
+				<!--		<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Pie"/>-->
+				<!--		<PropertyValue Property="Measures">-->
+				<!--			<Collection>-->
+				<!--				<PropertyPath>BaselinePrice</PropertyPath>-->
+				<!--			</Collection>-->
+				<!--		</PropertyValue>-->
+				<!--		<PropertyValue Property="Dimensions">-->
+				<!--			<Collection>-->
+				<!--				<PropertyPath>Currency</PropertyPath>-->
+				<!--			</Collection>-->
+				<!--		</PropertyValue>-->
+				<!--	</Record>-->
+				<!--</Annotation>-->
+				<Annotation Term="UI.DataPoint" Qualifier="comp">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="COMPONENT" Property="Title"/>
+						<PropertyValue Property="Value" Path="ComponentDetails/ComponentName"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="demand">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="DEMANDS" Property="Title"/>
+						<PropertyValue Property="Value" Path="DemandQty"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="supRes">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="SUPPLIER_RESPONSE" Property="Title"/>
+						<PropertyValue Property="Value" Path="ComponentId"/>
+						<PropertyValue String="10" Property="TargetValue"/>
+						<PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+						<PropertyValue Property="MinimumValue" Decimal="0"/>
+						<PropertyValue Property="MaximumValue" Decimal="10"/>
+						<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Positive"/>
+						<PropertyValue Property="Trend" EnumMember="UI.TrendType/Sideways"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="cost">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="COST" Property="Title"/>
+						<PropertyValue Property="Value" Path="BaselinePrice"/>
+						<PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+						<PropertyValue String="100" Property="TargetValue"/>
+						<PropertyValue Property="MinimumValue" Decimal="0"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="savings">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="SAVINGS" Property="Title"/>
+						<PropertyValue Property="Value">
+							<Apply Function="odata.concat">
+								<Path>baselineSpend</Path>
+								<String>%</String>
+							</Apply>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.HeaderFacets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#demand"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#supRes"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#cost"/>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#savings"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Chart">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#chartest"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+									<PropertyValue Property="Measure" PropertyPath="DemandQty"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes"/>
+						<PropertyValue Property="Actions"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Area"/>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>DemandQty</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>DemandId</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="chartest">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="CHARTTEST" Property="Title"/>
+						<PropertyValue Property="Value" Path="DemandQty"/>
+						<PropertyValue Property="TargetValue" Path="DemandQty"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue Property="Target" AnnotationPath="NegotiationDetails/@UI.LineItem"/>
+							<PropertyValue String="TEST" Property="Label"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataFieldWithNavigationPath">
+							<PropertyValue Property="Target" NavigationPropertyPath="NegotiationDetails"/>
+							<PropertyValue Property="Value" Path="BaselinePrice"/>
+							<PropertyValue String="{@i18n&gt;@TEST}" Property="Label"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="DemandId"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Label" String="Demand ID"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="ComponentDetails/ComponentName"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Label" String="Description"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="DemandQty"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Label" String="Quantity"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="BaselinePrice"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Label" String="Baseline Price"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="baselineSpend"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Label" String="Baseline Spend"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="responses"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+							<PropertyValue Property="Label" String="Responses"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Label" String="{@i18n&gt;@COMPONENT}"/>
+							<PropertyValue Property="Value" Path="ComponentId"/>
+							<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+							<PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithoutIcon"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!--===============================================================================
+                Entity Type from chosen navigation property
+                ================================================================================-->
+			<Annotations Target="sap.smartbusinessdemo.services.SalesShareType">
+				<Annotation Term="UI.Facets">
+					<Collection>
+						<Record Type="UI.CollectionFacet">
+							<PropertyValue String="Products" Property="ID"/>
+							<PropertyValue String="Product" Property="Label"/>
+							<PropertyValue Property="Facets">
+								<Collection>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue String="Product" Property="Label"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.Identification"/>
+									</Record>
+									<Record Type="UI.ReferenceFacet">
+										<PropertyValue String="REGION" Property="Label"/>
+										<PropertyValue Property="Target" AnnotationPath="@UI.LineItem"/>
+									</Record>
+								</Collection>
+							</PropertyValue>
+						</Record>
+						<Record Type="UI.ReferenceFacet">
+							<PropertyValue String="{@i18n&gt;@SecondFacetLabel}" Property="Label"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.LineItem"/>
+						</Record>
+						<!--<Record Type="UI.ReferenceFacet">-->
+						<!--	<PropertyValue Property="Label" String="{@i18n&gt;@ThirdFacetLabel}"/>-->
+						<!--	<PropertyValue AnnotationPath="@UI.LineItem" Property="Target"/>-->
+						<!--</Record>-->
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="CommodityManager.Negotiation">
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue String="SPEND" Property="Label"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#priceDP"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue String="RESPONSE" Property="Label"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.Chart#resCh"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataFieldForAnnotation">
+							<PropertyValue String="PROPOSED TARGET SHARE" Property="Label"/>
+							<PropertyValue Property="Target" AnnotationPath="@UI.DataPoint#ptsDP"/>
+							<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue String="SUPPLIER RESPONSE" Property="Label"/>
+							<PropertyValue Property="Value" Path="SupplierId"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue String="CURRENCY" Property="Label"/>
+							<PropertyValue Property="Value" Path="DemandDetails/baselineSpend"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="ptsDP">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="PROPOSED TARGET SHARE}" Property="Title"/>
+						<PropertyValue Property="Value" Path="Split"/>
+						<PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+						<PropertyValue String="100" Property="TargetValue"/>
+						<PropertyValue Property="MinimumValue" Decimal="0"/>
+						<PropertyValue Property="MaximumValue" Decimal="10"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="resDP">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="RESPONSE" Property="Title"/>
+						<PropertyValue Property="Value" Path="Split"/>
+						<PropertyValue Property="TargetValue" Path="Split"/>
+						<PropertyValue Property="CriticalityCalculation">
+							<Record>
+								<PropertyValue Property="ImprovementDirection" EnumMember="UI.ImprovementDirectionType/Maximize"/>
+								<PropertyValue String="8" Property="DeviationRangeHighValue"/>
+								<PropertyValue String="12" Property="DeviationRangeLowValue"/>
+								<PropertyValue String="11" Property="ToleranceRangeHighValue"/>
+								<PropertyValue String="7" Property="ToleranceRangeLowValue"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="priceDP">
+					<Record Type="UI.DataPointType">
+						<PropertyValue String="PRICE" Property="Title"/>
+						<PropertyValue Property="Value" Path="BaselinePrice"/>
+						<PropertyValue String="10" Property="TargetValue"/>
+						<PropertyValue Property="MinimumValue" Decimal="0"/>
+						<PropertyValue Property="MaximumValue" Decimal="10"/>
+						<PropertyValue Property="Visualization" EnumMember="UI.VisualizationType/Progress"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="resCh">
+					<Record Type="UI.ChartDefinitionType">
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="DataPoint" AnnotationPath="@UI.DataPoint#resDP"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+									<PropertyValue Property="Measure" PropertyPath="Split"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes"/>
+						<PropertyValue Property="Actions"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Area"/>
+						<PropertyValue String="RESPONSE" Property="Title"/>
+						<PropertyValue Property="Measures">
+							<Collection>
+								<PropertyPath>Split</PropertyPath>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection>
+								<PropertyPath>SupplierId</PropertyPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.HeaderInfo">
+					<Record Type="UI.HeaderInfoType">
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="AwardedPrice"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="TypeName" String="Product"/>
+						<PropertyValue Property="TypeNamePlural" String="Product"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="CommodityManager.Supplier">
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<!--<Record Type="UI.DataFieldWithIntentBasedNavigation">-->
+						<!--	<PropertyValue Property="Label" String="{@i18n&gt;@SUPPLIER_RESPONSE}"/>-->
+						<!--	<PropertyValue Property="SemanticObject" String="SupplierId"/>-->
+						<!--	<PropertyValue Property="Value" Path="Name"/>-->
+						<!--	<PropertyValue Property="Action" String="Ranking"/>-->
+						<!--	<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>-->
+						<!--	<PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithoutIcon"/>-->
+						<!--	<PropertyValue Property="IconUrl" Path="Ranking"/>-->
+						<!--	<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>-->
+						<!--</Record>-->
+						<Collection>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="DemandId"/>
+								<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								<PropertyValue Property="Label" String="Demand ID"/>
+							</Record>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="ComponentDetails/ComponentName"/>
+								<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								<PropertyValue Property="Label" String="Description"/>
+							</Record>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="DemandQty"/>
+								<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								<PropertyValue Property="Label" String="Quantity"/>
+							</Record>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="BaselinePrice"/>
+								<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								<PropertyValue Property="Label" String="Baseline Price"/>
+							</Record>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="baselineSpend"/>
+								<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								<PropertyValue Property="Label" String="Baseline Spend"/>
+							</Record>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="responses"/>
+								<Annotation Term="UI.Importance" EnumMember="UI.ImportanceType/High"/>
+								<PropertyValue Property="Label" String="Responses"/>
+							</Record>
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Label" String="{@i18n&gt;@COMPONENT}"/>
+								<PropertyValue Property="Value" Path="ComponentId"/>
+								<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Neutral"/>
+								<PropertyValue Property="CriticalityRepresentation" EnumMember="UI.CriticalityRepresentationType/WithoutIcon"/>
+							</Record>
+						</Collection>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,61 @@
+{
+  "projectType": [
+    "sap.watt.saptoolsets.fiori.project.ui5template.smartProject",
+    "sap.watt.uitools.ide.fiori",
+    "sap.watt.saptoolsets.fiori.project.uiadaptation"
+  ],
+  "generation": [
+    {
+      "templateId": "ui5template.smarttemplate",
+      "templateVersion": "1.40.12",
+      "dateTimeStamp": "Mon, 02 Jan 2017 06:13:56 GMT"
+    },
+    {
+      "templateId": "uiadaptation.changespreviewjs",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Fri, 20 Jan 2017 06:48:49 GMT"
+    },
+    {
+      "templateId": "uiadaptation.uiadaptationpanehtml",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Fri, 06 Jan 2017 06:53:22 GMT"
+    },
+    {
+      "templateId": "ui5template.objectpageextension",
+      "templateVersion": "1.0.0",
+      "dateTimeStamp": "Fri, 20 Jan 2017 05:22:51 GMT"
+    }
+  ],
+  "uiadaptation": {
+    "layer": "VENDOR"
+  },
+  "hybrid": {
+    "fioriLPAppID": "HAT_MOBILE_APP-display"
+  },
+  "mockpreview": {
+    "mockUri": "/CSODestination/CommodityManager",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "en,fr,de",
+    "defaultLanguage": "en",
+    "defaultI18NPropertyFile": "i18n.properties",
+    "resourceModelName": "i18n"
+  },
+  "basevalidator": {
+    "services": {
+      "xml": "fioriXmlAnalysis",
+      "js": "fioriJsValidator"
+    }
+  },
+  "codeCheckingTriggers": {
+    "notifyBeforePush": true,
+    "notifyBeforePushLevel": "Error",
+    "blockPush": false,
+    "blockPushLevel": "Error"
+  }
+}

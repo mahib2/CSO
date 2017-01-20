@@ -1,0 +1,7 @@
+<core:FragmentDefinition 
+controllerName="CSOSprint.ext.controller.ObjectPageExt"
+xmlns:core="sap.ui.core" xmlns="sap.m"><!--xmlns="sap.m"-->
+
+<!--<Text text="{i18n|sap.suite.ui.generic.template.ObjectPage|Negotiations>xfld.BreakoutColumnContent}"></Text>-->
+<Button text="SEND MESSAGE" press="sendMessage"/>
+</core:FragmentDefinition>
